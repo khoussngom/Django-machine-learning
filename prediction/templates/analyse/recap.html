@@ -1,0 +1,37 @@
+<h1>Résultats de l'analyse</h1>
+<p>L’utilisateur a la possibilité de générer le rapport d’une analyse en cliquant sur le bouton Générer le rapport. Ainsi, il obtient des visualisations par rapport à chaque UE et un tableau récapitulatif de l’analyse. Les figures 3.9 et 3.10 présentent respectivement les visualisations des résultats d’une UE et une partie du tableau récapitulatif d’une analyse.</p>
+
+<h2>Graphique ROC</h2>
+<img src="data:image/png;base64,{{ roc_graph }}" alt="Graphique ROC">
+
+<h2>Tableau des résultats</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Numéro matricule</th>
+            <th>Nom</th>
+            <th>Prénoms</th>
+            <th>Sexe</th>
+            <th>Analyse</th>
+            <th>Mathematique</th>
+            <th>Mathematiques Appliquees</th>
+            <th>Fondamentaux Des Bases De Donnees</th>
+            <th>Concepts Avances Des Reseaux Informatiques</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{ row.numero_matricule }}</td>
+            <td>{{ row.nom }}</td>
+            <td>{{ row.prenoms }}</td>
+            <td>{{ row.sexe }}</td>
+            <td>{{ row.analyse }}</td>
+            <td>{{ row.mathematique }}</td>
+            <td>{{ row.mathematiques_appliquees }}</td>
+            <td>{{ row.fondamentaux_des_bases_de_donnees }}</td>
+            <td>{{ row.concepts_avances_des_reseaux_informatiques }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    
+<head> 
+    <link rel="stylesheet" href="{% static 'css/connexion.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+</head>
+<body>
+
+    <h2 class="IL">IPD LEARNING</h2>
+    <div class="btni"> <a href="{% url 'inscription' %}" class="btna" >s'inscrire</a> </div>
+
+  
+    <div class="degrade"> </div>
+     
+   
+     
+    <form method="POST"action="{% url 'connexion' %}">
+        <div>
+            <h1>CONNEXION</h1>
+        </div>
+
+        {% if messages %}
+         <div class="error_messages">
+            {% for message in messages %}
+            <p class="error">{{ message }}</p>
+            {% endfor %}
+         </div>
+        {% endif %}
+
+        {% csrf_token %}
+        <label for="username"  class="username" >Entrer votre nom d'utilisateur:</label>
+        <input type="text" name="username" class="cmdp" placeholder="nom d'utilisateur" required >
+
+        <label for="mdp"  class="mdp">Entrer votre mot de passe:</label>
+        <input type="password" name="password" class="cmdp" placeholder="mot de passe" required>
+
+        <button type="submit " class="btnc">se connecter</button>
+        
+    </form>
+</body>
+</html>

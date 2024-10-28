@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de l'Analyse</title>
+
+    <!-- Ajout du CSS pour le fond bleu nuit et les animations -->
+    <style>
+        body {
+            background-color: #001f3f;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #FFD700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #004080;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #fff;
+            text-align: center;
+        }
+
+        th {
+            background-color: #00264d;
+        }
+
+        .valide {
+            background-color: green;
+            color:white;
+        }
+
+        .invalide {
+            background-color: red;
+            color:white;
+        }
+
+        a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Résultats de l'Analyse</h1>
+
+        <h2>Évaluation des Modèles de Régression</h2>
+        {% for ue, models in reg_results.items %}
+            <h3>{{ ue }}</h3>
+            <table>
+                <tr>
+                    <th>Modèle</th>
+                    <th>RMSE</th>
+                </tr>
+                {% for model, rmse in models.items %}
+                    <tr>
+                        <td>{{ model }}</td>
+                        <td>{{ rmse|floatformat:2 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+
+        <h2>Évaluation des Modèles de Classification</h2>
+        {% for ue, models in clf_results.items %}
+            <h3>{{ ue }}</h3>
+            <table>
+                <tr>
+                    <th>Modèle</th>
+                    <th>F1-score</th>
+                </tr>
+                {% for model, f1 in models.items %}
+                    <tr>
+                        <td>{{ model }}</td>
+                        <td>{{ f1|floatformat:4 }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+
+        <h2>Courbe ROC</h2>
+          
+        {{ graph }}
+
+        <h2>Informations des Étudiants et Résultats de Validation</h2>
+        <table>
+            <tr>
+                <th>Numéro Matricule</th>
+                <th>Nom</th>
+                <th>Prénoms</th>
+                <th>Sexe</th>
+                <th>Résultat de Validation</th>
+            </tr>
+            {% for student in etudiants %}
+            <tr>
+                <td>{{ student.Matricule }}</td>
+                <td>{{ student.Nom }}</td>
+                <td>{{ student.Prénom }}</td>
+                <td>{{ student.Sexe }}</td>
+                <td class="{% if student.analyse == 'valide' %}valide{% else %}invalide{% endif %}">
+                    {{ student.analyse }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{% url 'saisi' %}">Retour à la saisie</a>
+    </div>
+
+</body>
+
+</html>

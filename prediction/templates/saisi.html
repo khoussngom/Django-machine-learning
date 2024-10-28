@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANALYSE</title>
+</head>
+<body>
+  
+    <h1>Bienvenue dans votre plateforme de prediction des performances des étudiants </h1>
+
+<div class="droite">   
+    <button class="btd"><a href="{% url 'accueil' %}" class="btnd">Accueil</a></button>
+
+  <button class="btd"><a href="{% url 'deconnexion' %}" class="btnd">Deconnexion</a></button>
+
+  <form method="POST" enctype="multipart/form-data">
+    <h2>
+        <h2>Saisir les données</h2>
+    </h2>
+
+    {% if messages %}
+    <div class="error_messages">
+       {% for message in messages %}
+       <p class="error">{{ message }}</p>
+       {% endfor %}
+    </div>
+   {% endif %}
+
+    {% csrf_token %}
+    {{ form.as_p }}
+ 
+    <button type="submit">Envoyer</button>
+  
+ </form>
+ 
+</div> 
+</body>
+</html>

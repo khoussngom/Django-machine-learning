@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/inscription.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+<div class="un">
+
+    <div>  
+        <h2 class="IL">IPD LEARNING</h2>
+    </div>
+
+    <div class="boutc">
+   
+
+         <div class="btnc"> <a href="{% url 'connexion' %}" class="btna" >se connecter</a> </div>
+   </div>
+  
+</div> 
+  <div class="deux">
+    <div class="degrade"> </div>
+    <form method="POST">
+
+        
+        
+        <div>
+            <h1>INSCRIPTION</h1>
+        </div>
+
+        
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">s'inscrire</button>
+        
+
+    </form>
+</div>    
+</body>
+</html>
